@@ -1,0 +1,23 @@
+{
+  "name": "Summer Tranquility",
+  "description": "When the sun's high, the home's near, and the wind's calm, you wish it would never end.",
+  "image": "ipfs://QmWjHHwK7QLbiZ8WRUm1JGq5sYzYm7Qug6unAvoVRGAKdB/12.jpg",
+  "attributes": [
+    {
+      "trait_type": "warmth",
+      "value": "15"
+    },
+    {
+      "trait_type": "comfort",
+      "value": "15"
+    },
+    {
+      "trait_type": "happiness",
+      "value": "10"
+    },
+    {
+      "trait_type": "family",
+      "value": "10"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Summer Warmth",
+  "description": "Warmth in the middle of July in the city of the mountains.",
+  "image": "ipfs://QmWjHHwK7QLbiZ8WRUm1JGq5sYzYm7Qug6unAvoVRGAKdB/13.jpg",
+  "attributes": [
+    {
+      "trait_type": "warmth",
+      "value": "15"
+    },
+    {
+      "trait_type": "family",
+      "value": "15"
+    }
+  ]
+}

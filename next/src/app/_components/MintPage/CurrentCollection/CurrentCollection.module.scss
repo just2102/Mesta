@@ -1,0 +1,36 @@
+// @import "src/styles/variables.scss";
+@import "src/styles/index.custom";
+
+.currentCollection {
+  padding-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  h4,
+  h5 {
+    color: $text-primary;
+    text-align: center;
+  }
+
+  p {
+    padding: 0 1rem;
+    color: $text-primary;
+  }
+
+  img {
+    width: 500px;
+    height: auto;
+    border-radius: 20px;
+    padding: 1rem;
+
+    @include sm {
+      width: 100%;
+      height: auto;
+      padding: 1rem;
+    }
+  }
+
+  @include sm {
+    padding-top: 1rem;
+  }
+}

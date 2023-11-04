@@ -1,0 +1,23 @@
+{
+  "name": "Departure",
+  "description": "Leaving only to return and reunite with the one you love.",
+  "image": "ipfs://QmWjHHwK7QLbiZ8WRUm1JGq5sYzYm7Qug6unAvoVRGAKdB/8.jpg",
+  "attributes": [
+    {
+      "trait_type": "sadness",
+      "value": "10"
+    },
+    {
+      "trait_type": "love",
+      "value": "20"
+    },
+    {
+      "trait_type": "despair",
+      "value": "5"
+    },
+    {
+      "trait_type": "anger",
+      "value": "5"
+    }
+  ]
+}

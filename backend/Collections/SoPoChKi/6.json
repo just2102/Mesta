@@ -1,0 +1,11 @@
+{
+  "name": "Hopes",
+  "description": "Gives you hope for the future.",
+  "image": "ipfs://QmWjHHwK7QLbiZ8WRUm1JGq5sYzYm7Qug6unAvoVRGAKdB/6.PNG",
+  "attributes": [
+    {
+      "trait_type": "comfort",
+      "value": "20"
+    }
+  ]
+}

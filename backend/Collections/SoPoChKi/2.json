@@ -1,0 +1,23 @@
+{
+  "name": "Ascending — Winter",
+  "description": "Ascending (youtu.be/qttK14pPmw0). In a town in the mountains four guys have only one way — up. But will they not lose themselves having found refuge beside a lonely birch tree? Will they make it to the top?",
+  "image": "ipfs://QmWjHHwK7QLbiZ8WRUm1JGq5sYzYm7Qug6unAvoVRGAKdB/2.jpg",
+  "attributes": [
+    {
+      "trait_type": "loneliness",
+      "value": "20"
+    },
+    {
+      "trait_type": "addiction",
+      "value": "15"
+    },
+    {
+      "trait_type": "sadness",
+      "value": "10"
+    },
+    {
+      "trait_type": "nostalgia",
+      "value": "10"
+    }
+  ]
+}

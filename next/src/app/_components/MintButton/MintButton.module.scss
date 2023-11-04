@@ -1,0 +1,11 @@
+@import "src/styles/index.custom";
+.mintButton {
+  background-color: rgb(226, 199, 214);
+  color: $button-primary-text;
+  font-weight: bold;
+  font-size: large;
+
+  &:hover {
+    background-color: rgb(234, 212, 243);
+  }
+}

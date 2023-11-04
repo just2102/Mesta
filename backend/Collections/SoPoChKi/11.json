@@ -1,0 +1,19 @@
+{
+  "name": "Winter Lullaby",
+  "description": "Restore me the rocks where the snow-flake reposes, though still they are sacred to freedom and love.",
+  "image": "ipfs://QmWjHHwK7QLbiZ8WRUm1JGq5sYzYm7Qug6unAvoVRGAKdB/11.jpg",
+  "attributes": [
+    {
+      "trait_type": "nostalgia",
+      "value": "20"
+    },
+    {
+      "trait_type": "loneliness",
+      "value": "10"
+    },
+    {
+      "trait_type": "addiction",
+      "value": "5"
+    }
+  ]
+}

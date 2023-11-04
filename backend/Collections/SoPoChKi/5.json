@@ -1,0 +1,15 @@
+{
+  "name": "Road to the Lighthouse",
+  "description": "Is hard when you are alone.",
+  "image": "ipfs://QmWjHHwK7QLbiZ8WRUm1JGq5sYzYm7Qug6unAvoVRGAKdB/5.jpg",
+  "attributes": [
+    {
+      "trait_type": "comfort",
+      "value": "19"
+    },
+    {
+      "trait_type": "friendship",
+      "value": "15"
+    }
+  ]
+}

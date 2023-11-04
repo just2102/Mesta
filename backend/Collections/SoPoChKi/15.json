@@ -1,0 +1,15 @@
+{
+  "name": "Simple Things",
+  "description": "To amaze to the beauty of the simple things around us is to be truly alive.",
+  "image": "ipfs://QmWjHHwK7QLbiZ8WRUm1JGq5sYzYm7Qug6unAvoVRGAKdB/15.jpg",
+  "attributes": [
+    {
+      "trait_type": "warmth",
+      "value": "15"
+    },
+    {
+      "trait_type": "calmness",
+      "value": "10"
+    }
+  ]
+}

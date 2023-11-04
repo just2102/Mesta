@@ -1,0 +1,23 @@
+{
+  "name": "Light",
+  "description": "There is a light that never goes out.",
+  "image": "ipfs://QmWjHHwK7QLbiZ8WRUm1JGq5sYzYm7Qug6unAvoVRGAKdB/10.jpg",
+  "attributes": [
+    {
+      "trait_type": "nostalgia",
+      "value": "20"
+    },
+    {
+      "trait_type": "warmth",
+      "value": "20"
+    },
+    {
+      "trait_type": "comfort",
+      "value": "20"
+    },
+    {
+      "trait_type": "family",
+      "value": "10"
+    }
+  ]
+}

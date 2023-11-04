@@ -1,0 +1,15 @@
+{
+  "name": "Despair",
+  "description": "Feeling of despair captured in a single moment.",
+  "image": "ipfs://QmWjHHwK7QLbiZ8WRUm1JGq5sYzYm7Qug6unAvoVRGAKdB/7.png",
+  "attributes": [
+    {
+      "trait_type": "despair",
+      "value": "20"
+    },
+    {
+      "trait_type": "sadness",
+      "value": "15"
+    }
+  ]
+}

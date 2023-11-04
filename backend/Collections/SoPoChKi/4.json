@@ -1,0 +1,15 @@
+{
+  "name": "Home",
+  "description": "Home is where the heart is.",
+  "image": "ipfs://QmWjHHwK7QLbiZ8WRUm1JGq5sYzYm7Qug6unAvoVRGAKdB/4.PNG",
+  "attributes": [
+    {
+      "trait_type": "nostalgia",
+      "value": "15"
+    },
+    {
+      "trait_type": "warmth",
+      "value": "16"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Daily",
+  "description": "To find inspiration in the simplest of things.",
+  "image": "ipfs://QmWjHHwK7QLbiZ8WRUm1JGq5sYzYm7Qug6unAvoVRGAKdB/9.jpg",
+  "attributes": [
+    {
+      "trait_type": "inspiration",
+      "value": "12"
+    },
+    {
+      "trait_type": "nostalgia",
+      "value": "7"
+    }
+  ]
+}

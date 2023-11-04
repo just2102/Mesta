@@ -1,0 +1,23 @@
+{
+  "name": "Coming Home",
+  "description": "Winter has come, and it's time to go home, my friend.",
+  "image": "ipfs://QmWjHHwK7QLbiZ8WRUm1JGq5sYzYm7Qug6unAvoVRGAKdB/14.jpg",
+  "attributes": [
+    {
+      "trait_type": "nostalgia",
+      "value": "20"
+    },
+    {
+      "trait_type": "warmth",
+      "value": "20"
+    },
+    {
+      "trait_type": "comfort",
+      "value": "15"
+    },
+    {
+      "trait_type": "sadness",
+      "value": "10"
+    }
+  ]
+}

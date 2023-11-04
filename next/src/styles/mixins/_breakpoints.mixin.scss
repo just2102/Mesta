@@ -1,0 +1,36 @@
+// Breakpoints | from 0 to $variable
+
+// Generic custom breakpoint
+@mixin breakpoint($value) {
+  @media (max-width: #{$value}) {
+    @content;
+  }
+}
+
+// Mobile devices
+@mixin xs {
+  @include breakpoint($screen-xs-min) {
+    @content;
+  }
+}
+
+// Small devices
+@mixin sm {
+  @include breakpoint($screen-sm-min) {
+    @content;
+  }
+}
+
+// Medium devices
+@mixin md {
+  @include breakpoint($screen-md-min) {
+    @content;
+  }
+}
+
+// Large devices
+@mixin lg {
+  @include breakpoint($screen-lg-min) {
+    @content;
+  }
+}
