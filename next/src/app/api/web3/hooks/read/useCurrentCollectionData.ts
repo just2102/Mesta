@@ -1,12 +1,12 @@
 "use client";
 
-import { mestaAbi } from "../abi/Mesta";
-import { mestaCollectionAbi } from "../abi/MestaCollection";
+import { mestaAbi } from "../../abi/Mesta";
+import { mestaCollectionAbi } from "../../abi/MestaCollection";
 import { useContractRead, useContractReads } from "wagmi";
 import { useNetwork } from "wagmi";
-import { MestaNetworksMap } from "../const/Addresses";
-import { type CollectionData } from "../types/Collection";
-import { fetchIpfsImage } from "../../ipfs/fetchIpfsImage";
+import { MestaNetworksMap } from "../../const/Addresses";
+import { type CollectionData } from "../../types/Collection";
+import { fetchIpfsImage } from "../../../ipfs/fetchIpfsImage";
 import { useEffect, useState } from "react";
 
 export const useCurrentCollectionData = () => {
@@ -84,6 +84,7 @@ export const useCurrentCollectionData = () => {
             name: data[2]?.result as string,
             maxSupply: Number(data[3]?.result),
             totalSupply: Number(data[4]?.result),
+            collectionAddress: currentCollectionAddress,
           };
 
           setCollectionData(newCollectionData);

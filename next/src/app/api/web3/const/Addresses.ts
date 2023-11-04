@@ -1,3 +1,3 @@
 export const MestaNetworksMap = new Map([
-  [11155111, "0x0e2680b64b59a6da0a117aa3b485286df3c18cef"], // sepolia
+  [11155111, "0x081207F0602A4c0CF6fc07DD21c5Fd7E2aE36Af0"], // sepolia
 ]);

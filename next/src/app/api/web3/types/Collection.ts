@@ -4,4 +4,5 @@ export type CollectionData = {
   name: string | undefined;
   maxSupply: number;
   totalSupply: number;
+  collectionAddress: `0x${string}` | undefined;
 };

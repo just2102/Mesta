@@ -1,9 +1,9 @@
 "use client";
 
-import { mestaAbi } from "../abi/Mesta";
+import { mestaAbi } from "../../abi/Mesta";
 import { useContractRead } from "wagmi";
 import { useNetwork } from "wagmi";
-import { MestaNetworksMap } from "../const/Addresses";
+import { MestaNetworksMap } from "../../const/Addresses";
 
 export const useCurrentCollection = () => {
   const { chain } = useNetwork();

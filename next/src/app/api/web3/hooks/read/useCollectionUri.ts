@@ -1,6 +1,6 @@
 "use client";
 
-import { mestaCollectionAbi } from "../abi/MestaCollection";
+import { mestaCollectionAbi } from "../../abi/MestaCollection";
 import { useContractRead } from "wagmi";
 
 export const useCollectionUri = (collectionAddress: string | undefined) => {
