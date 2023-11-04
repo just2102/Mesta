@@ -57,7 +57,7 @@ contract MestaCollection is ERC721, ERC721URIStorage, Ownable {
 }
 
 contract Mesta is Ownable {
-    mapping(string => address) public collections;
+    mapping (address => bool) public collections;
     address public currentCollection;
 
     constructor() Ownable(msg.sender) {}
@@ -75,26 +75,26 @@ contract Mesta is Ownable {
         string memory coverDirectURI
     ) 
         public onlyOwner returns (address) {
-        require(collections[name] == address(0), "Collection already exists");
+        require(!collections[currentCollection], "Collection already exists");
         
         MestaCollection newCollection = new MestaCollection(
             name, description, symbol, 
             max_supply, baseTokenURI, coverDirectURI
         );
 
-        collections[name] = address(newCollection);
+        collections[address(newCollection)] = true;
         currentCollection = address(newCollection);
 
         emit NewCollectionCreated(address(newCollection));
         return address(newCollection);
     }
 
-    function mintToken(string memory collectionName, address to) public {
-        require(collections[collectionName] != address(0), "Collection does not exist");
-        MestaCollection collection = MestaCollection(collections[collectionName]);
+    function mintToken(address collectionAddress, address to) public {
+        require(collections[collectionAddress], "Collection does not exist");
+        MestaCollection collection = MestaCollection(collectionAddress);
         
         uint256 mintedTokenId = collection.safeMint(to);
         
-        emit NewTokenMinted(collections[collectionName], to, mintedTokenId);
+        emit NewTokenMinted(collectionAddress, to, mintedTokenId);
     }
 }

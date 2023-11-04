@@ -86,17 +86,17 @@ export const mestaAbi = [
   {
     inputs: [
       {
-        internalType: "string",
+        internalType: "address",
         name: "",
-        type: "string",
+        type: "address",
       },
     ],
     name: "collections",
     outputs: [
       {
-        internalType: "address",
+        internalType: "bool",
         name: "",
-        type: "address",
+        type: "bool",
       },
     ],
     stateMutability: "view",
@@ -162,9 +162,9 @@ export const mestaAbi = [
   {
     inputs: [
       {
-        internalType: "string",
-        name: "collectionName",
-        type: "string",
+        internalType: "address",
+        name: "collectionAddress",
+        type: "address",
       },
       {
         internalType: "address",
