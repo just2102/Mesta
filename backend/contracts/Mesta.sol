@@ -75,7 +75,6 @@ contract Mesta is Ownable {
         string memory coverDirectURI
     ) 
         public onlyOwner returns (address) {
-        require(!collections[currentCollection], "Collection already exists");
         
         MestaCollection newCollection = new MestaCollection(
             name, description, symbol, 
