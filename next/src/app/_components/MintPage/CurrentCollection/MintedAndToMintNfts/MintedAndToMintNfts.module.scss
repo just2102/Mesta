@@ -1,0 +1,19 @@
+@import "src/styles/index.custom";
+
+.mintedAndToMintNfts {
+  display: grid;
+  width: 40%;
+  grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+  padding: 1rem;
+  grid-gap: 1rem;
+  align-items: start;
+  justify-content: center;
+
+  @include md {
+    width: unset;
+  }
+
+  @include sm {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

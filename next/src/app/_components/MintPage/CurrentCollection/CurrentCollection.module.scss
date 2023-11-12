@@ -1,36 +1,42 @@
-// @import "src/styles/variables.scss";
 @import "src/styles/index.custom";
 
 .currentCollection {
-  padding-top: 5rem;
+  padding-top: 6rem;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   gap: 0.5rem;
-  h4,
-  h5 {
+
+  .currentCollection_generalTitle,
+  .currentCollection_title {
     color: $text-primary;
     text-align: center;
   }
 
-  p {
-    padding: 0 1rem;
-    color: $text-primary;
+  .currentCollection_title {
+    padding-bottom: 5px;
   }
 
-  img {
-    width: 500px;
+  .currentCollection_image {
+    max-width: 500px;
     height: auto;
+    border: 2px solid $text-primary;
+    object-fit: cover;
     border-radius: 20px;
-    padding: 1rem;
 
-    @include sm {
-      width: 100%;
-      height: auto;
-      padding: 1rem;
+    @include md {
+      max-width: 100%;
     }
   }
 
-  @include sm {
-    padding-top: 1rem;
+  .currentCollection_description {
+    padding: 1rem;
+    color: $text-primary;
+  }
+
+  @include md {
+    flex-direction: column;
+  }
+
+  .currentCollectionInfo {
   }
 }

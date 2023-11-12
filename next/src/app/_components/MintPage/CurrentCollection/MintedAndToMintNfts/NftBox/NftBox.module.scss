@@ -1,0 +1,23 @@
+.nftBoxContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  overflow: hidden;
+  position: relative;
+}
+
+.nftImage {
+  max-width: 100%;
+  height: auto;
+}
+
+.nftText {
+  font-size: 16px;
+  color: #333;
+}
+
+.notMinted {
+  opacity: 0.7;
+}

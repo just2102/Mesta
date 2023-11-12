@@ -59,12 +59,19 @@ export const useCurrentCollectionData = () => {
       functionName: "totalSupply",
       chainId: chain?.id,
     },
+    {
+      address: currentCollectionAddress!,
+      abi: mestaCollectionAbi,
+      functionName: "_baseTokenURI",
+      chainId: chain?.id,
+    },
   ];
   const {
     data,
     isError: collectionDataIsError,
     isLoading: collectionDataLoading,
     error: collectionDataError,
+    refetch,
   } = useContractReads({
     contracts,
     enabled: contracts.length > 0,
@@ -95,10 +102,10 @@ export const useCurrentCollectionData = () => {
     };
 
     void updateCollectionData();
-  }, [data]);
+  }, [data, refetch]);
 
   const isLoading = currentCollectionLoading || collectionDataLoading;
   const isError = currentCollectionIsError || collectionDataIsError;
   const error = currentCollectionError ?? collectionDataError;
-  return { collectionData, error, isError, isLoading };
+  return { collectionData, error, isError, isLoading, refetch };
 };

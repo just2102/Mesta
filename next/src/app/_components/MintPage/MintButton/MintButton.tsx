@@ -3,24 +3,29 @@
 import { Button } from "@mui/material";
 import styles from "./MintButton.module.scss";
 import { useMint } from "~/app/api/web3/hooks/write/useMint";
+import { useEffect } from "react";
 
 interface Props {
-  collectionAddress: `0x${string}` | undefined;
+  mint: () => void;
+  isSendingMintTx: boolean;
+  isWaitingMint: boolean;
 }
 
-export default function MintButton({ collectionAddress }: Props) {
-  const { data, isLoading, isSuccess, write } = useMint(collectionAddress);
-
+export default function MintButton({
+  mint,
+  isSendingMintTx,
+  isWaitingMint,
+}: Props) {
   return (
     <>
       <Button
-        onClick={() => write()}
+        disabled={isSendingMintTx || isWaitingMint}
+        onClick={mint}
         className={styles.mintButton}
         variant="outlined"
       >
-        Mint
+        Mint (Free)
       </Button>
-      {isSuccess && <span>SUCCESS!</span>}
     </>
   );
 }
