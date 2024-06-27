@@ -10,14 +10,17 @@ interface Props {
   collectionData: CollectionData | null;
   mint: () => void;
   isSendingMintTx: boolean;
-  isWaitingMint: boolean;
+
+  mintTx: `0x${string}` | undefined;
+  mintingNftId: number;
 }
 
 export function CurrentCollection({
   collectionData,
   mint,
   isSendingMintTx,
-  isWaitingMint,
+  mintTx,
+  mintingNftId,
 }: Props) {
   if (!collectionData) return null;
 
@@ -51,13 +54,14 @@ export function CurrentCollection({
         <MintButton
           mint={mint}
           isSendingMintTx={isSendingMintTx}
-          isWaitingMint={isWaitingMint}
+          collectionData={collectionData}
         />
       </Box>
 
       {collectionData && (
         <MintedAndToMintNfts
-          isWaitingMint={isWaitingMint}
+          mintTx={mintTx}
+          mintingNftId={mintingNftId}
           collectionData={collectionData}
         />
       )}

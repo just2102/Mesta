@@ -7,10 +7,16 @@ import styles from "./MintedAndToMintNfts.module.scss";
 
 interface Props {
   collectionData: CollectionData;
-  isWaitingMint: boolean;
+
+  mintTx: `0x${string}` | undefined;
+  mintingNftId: number;
 }
 
-export function MintedAndToMintNfts({ collectionData, isWaitingMint }: Props) {
+export function MintedAndToMintNfts({
+  collectionData,
+  mintTx,
+  mintingNftId,
+}: Props) {
   const numOfNftsMinted = collectionData.totalSupply;
   const totalNumOfNftsInCollection = collectionData.maxSupply;
 
@@ -20,9 +26,10 @@ export function MintedAndToMintNfts({ collectionData, isWaitingMint }: Props) {
           <NftBox
             nftId={i + 1}
             isMinted={i + 1 <= numOfNftsMinted}
-            isWaitingMint={isWaitingMint && i + 1 === numOfNftsMinted + 1}
             collectionAddress={collectionData.collectionAddress!}
             key={i}
+            mintTx={mintTx}
+            mintingNftId={mintingNftId}
           />
         ))
       : null;

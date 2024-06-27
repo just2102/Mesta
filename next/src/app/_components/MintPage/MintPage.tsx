@@ -5,18 +5,21 @@ export const dynamic = "force-dynamic";
 import { Box } from "@mui/material";
 import { CurrentCollection } from "./CurrentCollection/CurrentCollection";
 import styles from "./MintPage.module.scss";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAccount, useWriteContract } from "wagmi";
 import { MestaNetworksMap } from "~/app/api/web3/const/Addresses";
 import { mestaAbi } from "~/app/api/web3/abi/Mesta";
 import { readCurrentCollectionData } from "~/app/api/web3/actions/readCurrentCollectionData";
 import { type CollectionData } from "~/app/api/web3/types/Collection";
+import { waitForTransactionReceipt } from "@wagmi/core";
+import { config } from "~/config";
+import { useRouter } from "next/navigation";
 
 export function MintPage() {
+  const router = useRouter();
   const { chain, address } = useAccount();
   const {
-    writeContract,
-    data: actualMintData,
+    writeContractAsync,
     isSuccess: mintedSuccess,
     isError: mintedError,
     isLoading: isSendingMintTx,
@@ -26,9 +29,9 @@ export function MintPage() {
     null
   );
 
-  const [isWaitingMint, setIsWaitingMint] = useState(false);
+  const [mintTx, setMintTx] = useState<`0x${string}` | undefined>(undefined);
 
-  const handleMint = () => {
+  const handleMint = async () => {
     if (!collectionData?.collectionAddress) {
       return;
     }
@@ -40,26 +43,45 @@ export function MintPage() {
       chain?.id ?? 11155111
     );
 
-    writeContract({
+    const mintTx = await writeContractAsync({
       address: mestaAddress! as `0x${string}`,
       abi: mestaAbi,
       functionName: "mintToken",
       args: [collectionData.collectionAddress, address],
     });
+
+    setMintTx(mintTx);
   };
 
   const shouldDisplayCurrentCollection = collectionData !== null;
 
-  useEffect(() => {
-    const fetchCollectionData = async () => {
-      if (!chain) return;
+  const fetchCollectionData = useCallback(async () => {
+    if (!chain) return;
 
-      const _collectionData = await readCurrentCollectionData(chain);
-      setCollectionData(_collectionData);
+    const _collectionData = await readCurrentCollectionData(chain);
+    setCollectionData(_collectionData);
+  }, [chain]);
+
+  useEffect(() => {
+    void fetchCollectionData();
+  }, [chain, fetchCollectionData]);
+
+  useEffect(() => {
+    const waitForReceipt = async () => {
+      if (!mintTx) return;
+
+      const receipt = await waitForTransactionReceipt(config, {
+        hash: mintTx,
+        confirmations: 1,
+      });
+
+      if (receipt.status === "success") {
+        void router.refresh();
+      }
     };
 
-    void fetchCollectionData();
-  }, [chain]);
+    void waitForReceipt();
+  }, [mintTx, router]);
 
   return (
     <Box className={styles.mintPage}>
@@ -69,7 +91,8 @@ export function MintPage() {
             collectionData={collectionData}
             mint={handleMint}
             isSendingMintTx={isSendingMintTx}
-            isWaitingMint={isWaitingMint}
+            mintTx={mintTx}
+            mintingNftId={collectionData.totalSupply + 1}
           />
         </>
       )}

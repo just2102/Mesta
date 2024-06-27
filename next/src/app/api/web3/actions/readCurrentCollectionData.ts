@@ -6,7 +6,7 @@ import { mestaCollectionAbi } from "../abi/MestaCollection";
 import { fetchIpfsImage } from "../../ipfs/fetchIpfsImage";
 import { type CollectionData } from "../types/Collection";
 import { type Chain } from "viem";
-import { config, getClient } from "~/config";
+import { getClient } from "~/config";
 
 export async function readCurrentCollectionData(chain: Chain) {
   const mestaAddress = MestaNetworksMap.get(chain.id);
@@ -14,8 +14,6 @@ export async function readCurrentCollectionData(chain: Chain) {
     throw new Error(`Mesta address not found for chain ${chain.id}`);
 
   const client = getClient(chain);
-
-  config.getClient().chain;
 
   const currentCollectionAddress = await client.readContract({
     functionName: "currentCollection",

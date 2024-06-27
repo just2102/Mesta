@@ -1,8 +1,6 @@
-import Image from "next/image";
 import { useNftData } from "~/app/api/web3/hooks/read/useNftData";
 
 import styles from "./NftBox.module.scss";
-import { CircularProgress } from "@mui/material";
 import { ToBeMintedNft } from "./ToBeMintedNft";
 import { MintedNft } from "./MintedNft";
 import { IsWaitingMintNft } from "./IsWaitingMintNft";
@@ -11,25 +9,30 @@ interface Props {
   nftId: number;
   collectionAddress: string;
   isMinted: boolean;
-  isWaitingMint: boolean;
+
+  mintTx: `0x${string}` | undefined;
+  mintingNftId: number;
 }
 export function NftBox({
   nftId,
   collectionAddress,
   isMinted,
-  isWaitingMint,
+  mintTx,
+  mintingNftId,
 }: Props) {
   const { nftImage, error, isLoading } = useNftData(
     nftId,
     collectionAddress,
     isMinted
   );
-  const shouldDisplayMintedNft = isMinted && !isWaitingMint && nftImage;
+  const shouldDisplayMintedNft = isMinted && nftImage;
+
+  const isMintingThisNft = mintingNftId === nftId && mintTx;
 
   return (
     <div className={styles.nftBoxContainer}>
       {shouldDisplayMintedNft && <MintedNft src={nftImage} nftId={nftId} />}
-      {isWaitingMint && <IsWaitingMintNft />}
+      {isMintingThisNft && <IsWaitingMintNft />}
       {!isMinted && <ToBeMintedNft />}
     </div>
   );
