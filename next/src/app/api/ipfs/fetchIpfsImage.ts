@@ -1,7 +1,9 @@
+"use server";
+
 export const fetchIpfsImage = async (ipfsUri: string): Promise<string> => {
-  const clientId = process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID;
+  const clientId = process.env.THIRDWEB_CLIENT_ID;
   if (!clientId) {
-    throw new Error("Missing NEXT_PUBLIC_THIRDWEB_CLIENT_ID");
+    throw new Error("Missing THIRDWEB_CLIENT_ID");
   }
   const ipfsGateway = `https://${clientId}.ipfscdn.io/ipfs/`;
   const ipfsHash = ipfsUri.split("ipfs://")[1];
@@ -17,11 +19,10 @@ export const fetchIpfsImage = async (ipfsUri: string): Promise<string> => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const blob = await response.blob();
-    const imageUrl = URL.createObjectURL(blob);
-    return imageUrl;
+
+    return response.url;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching IPFS Image:", error);
     throw error;
   }
 };

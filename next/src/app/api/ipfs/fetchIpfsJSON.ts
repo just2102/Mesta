@@ -1,9 +1,11 @@
+"use server";
+
 import { type IpfsJson } from "./ipfsFetcher.type";
 
 export const fetchIpfsJSON = async (ipfsUri: string): Promise<IpfsJson> => {
-  const clientId = process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID;
+  const clientId = process.env.THIRDWEB_CLIENT_ID;
   if (!clientId) {
-    throw new Error("Missing NEXT_PUBLIC_THIRDWEB_CLIENT_ID");
+    throw new Error("Missing THIRDWEB_CLIENT_ID");
   }
   const ipfsGateway = `https://${clientId}.ipfscdn.io/ipfs/`;
   const ipfsHash = ipfsUri.split("ipfs://")[1];
