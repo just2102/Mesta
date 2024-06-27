@@ -1,6 +1,6 @@
 import { defaultWagmiConfig } from "@web3modal/wagmi";
 import { type Chain, createPublicClient, http } from "viem";
-import { mainnet, sepolia } from "wagmi/chains";
+import { mainnet, sepolia, scroll } from "wagmi/chains";
 import { walletConnect } from "wagmi/connectors";
 
 export function getProjectId() {
@@ -18,7 +18,7 @@ const metadata = {
   icons: ["https://avatars.githubusercontent.com/u/37784886"],
 };
 
-const chains = [mainnet, sepolia] as const;
+const chains = [mainnet, sepolia, scroll] as const;
 export const config = defaultWagmiConfig({
   chains,
   projectId: getProjectId(),
