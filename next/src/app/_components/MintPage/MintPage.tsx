@@ -4,7 +4,6 @@ import { Box } from "@mui/material";
 import { CurrentCollection } from "./CurrentCollection/CurrentCollection";
 import styles from "./MintPage.module.scss";
 import Loading from "~/app/loading";
-import { ConnectWalletCta } from "../ConnectWalletCta/ConnectWalletCta";
 import { useCurrentCollectionData } from "~/app/api/web3/hooks/read/useCurrentCollectionData";
 import { useEffect, useState } from "react";
 import { useAccount, useWriteContract } from "wagmi";
@@ -47,7 +46,6 @@ export function MintPage() {
     });
   };
 
-  const shouldDisplayConnectWalletCta = !collectionData || isError;
   const shouldDisplayCurrentCollection =
     collectionData && !isError && !isLoading;
 
@@ -61,7 +59,6 @@ export function MintPage() {
   return (
     <Box className={styles.mintPage}>
       {isLoading && <Loading />}
-      {shouldDisplayConnectWalletCta && <ConnectWalletCta />}
       {shouldDisplayCurrentCollection && (
         <>
           <CurrentCollection
