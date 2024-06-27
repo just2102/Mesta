@@ -26,11 +26,9 @@ export function MintPage() {
 
   const handleMint = () => {
     if (!collectionData?.collectionAddress) {
-      console.error("Collection address is not defined");
       return;
     }
     if (!address) {
-      console.error("Address is not defined");
       return;
     }
 

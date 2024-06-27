@@ -75,6 +75,11 @@ export const useCurrentCollectionData = (chain: Chain | undefined) => {
     refetch,
   } = useReadContracts({
     contracts,
+    query: {
+      cacheTime: 0,
+      staleTime: 0,
+      keepPreviousData: false,
+    },
   });
 
   useEffect(() => {
