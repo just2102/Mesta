@@ -51,14 +51,14 @@ export function MintPage() {
   const shouldDisplayCurrentCollection = collectionData !== null;
 
   useEffect(() => {
-    const fetchasd = async () => {
+    const fetchCollectionData = async () => {
       if (!chain) return;
 
       const _collectionData = await readCurrentCollectionData(chain);
       setCollectionData(_collectionData);
     };
 
-    void fetchasd();
+    void fetchCollectionData();
   }, [chain]);
 
   return (

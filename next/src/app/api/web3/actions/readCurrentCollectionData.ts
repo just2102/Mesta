@@ -1,50 +1,51 @@
-"use server";
+"use client";
 
-import { readContract } from "viem/actions";
 import { MestaNetworksMap } from "../const/Addresses";
-import { type Chain } from "wagmi/chains";
-import { getClient } from "~/config";
 import { mestaAbi } from "../abi/Mesta";
 import { mestaCollectionAbi } from "../abi/MestaCollection";
 import { fetchIpfsImage } from "../../ipfs/fetchIpfsImage";
 import { type CollectionData } from "../types/Collection";
+import { type Chain } from "viem";
+import { config, getClient } from "~/config";
 
 export async function readCurrentCollectionData(chain: Chain) {
-  const mestaAddress: string | undefined = MestaNetworksMap.get(
-    chain?.id ?? 11155111
-  );
+  const mestaAddress = MestaNetworksMap.get(chain.id);
+  if (!mestaAddress)
+    throw new Error(`Mesta address not found for chain ${chain.id}`);
 
   const client = getClient(chain);
 
-  const currentCollectionAddress = await readContract(client, {
+  config.getClient().chain;
+
+  const currentCollectionAddress = await client.readContract({
     functionName: "currentCollection",
-    address: mestaAddress as `0x${string}`,
+    address: mestaAddress,
     abi: mestaAbi,
   });
 
   const [coverDirectURI, description, name, maxSupply, totalSupply] =
     await Promise.all([
-      readContract(client, {
+      client.readContract({
         functionName: "coverDirectURI",
         address: currentCollectionAddress,
         abi: mestaCollectionAbi,
       }),
-      readContract(client, {
+      client.readContract({
         functionName: "description",
         address: currentCollectionAddress,
         abi: mestaCollectionAbi,
       }),
-      readContract(client, {
+      client.readContract({
         functionName: "name",
         address: currentCollectionAddress,
         abi: mestaCollectionAbi,
       }),
-      readContract(client, {
+      client.readContract({
         functionName: "max_supply",
         address: currentCollectionAddress,
         abi: mestaCollectionAbi,
       }),
-      readContract(client, {
+      client.readContract({
         functionName: "totalSupply",
         address: currentCollectionAddress,
         abi: mestaCollectionAbi,
@@ -65,8 +66,6 @@ export async function readCurrentCollectionData(chain: Chain) {
     totalSupply: Number(totalSupply),
     collectionAddress: currentCollectionAddress,
   };
-
-  console.log("newCollectionData", newCollectionData);
 
   return newCollectionData;
 }

@@ -14,7 +14,7 @@ export function getProjectId() {
 const metadata = {
   name: "Web3Modal",
   description: "Web3Modal Example",
-  url: "https://web3modal.com", // origin must match your domain & subdomain
+  url: "https://web3modal.com",
   icons: ["https://avatars.githubusercontent.com/u/37784886"],
 };
 
