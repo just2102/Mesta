@@ -20,6 +20,7 @@ export function CurrentCollection({
   isWaitingMint,
 }: Props) {
   if (!collectionData) return null;
+
   const { coverAsImage } = collectionData;
   return (
     <Box className={styles.currentCollection}>

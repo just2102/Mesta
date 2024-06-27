@@ -1,6 +1,6 @@
 "use client";
 
-import { useContractRead } from "wagmi";
+import { useReadContract } from "wagmi";
 import { mestaCollectionAbi } from "../../abi/MestaCollection";
 import { useEffect, useState } from "react";
 import { fetchIpfsImage } from "~/app/api/ipfs/fetchIpfsImage";
@@ -15,12 +15,11 @@ export const useNftData = (
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const { data: tokenUriData, isSuccess } = useContractRead({
+  const { data: tokenUriData, isSuccess } = useReadContract({
     address: collectionAddress as `0x${string}`,
     abi: mestaCollectionAbi,
     functionName: "tokenURI",
     args: [BigInt(nftId)],
-    enabled: isMinted,
   });
 
   useEffect(() => {

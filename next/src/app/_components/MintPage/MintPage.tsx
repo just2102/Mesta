@@ -6,33 +6,57 @@ import styles from "./MintPage.module.scss";
 import Loading from "~/app/loading";
 import { ConnectWalletCta } from "../ConnectWalletCta/ConnectWalletCta";
 import { useCurrentCollectionData } from "~/app/api/web3/hooks/read/useCurrentCollectionData";
-import { useNetwork } from "wagmi";
-import { useMint } from "~/app/api/web3/hooks/write/useMint";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useAccount, useWriteContract } from "wagmi";
+import { MestaNetworksMap } from "~/app/api/web3/const/Addresses";
+import { mestaAbi } from "~/app/api/web3/abi/Mesta";
 
 export function MintPage() {
-  const { chain } = useNetwork();
-  const { collectionData, error, isError, isLoading, refetch } =
-    useCurrentCollectionData();
-
+  const { chain, address } = useAccount();
   const {
-    actualMintData,
-    isSendingMintTx,
-    isWaitingMint,
-    mintedSuccess,
-    write: writeMint,
-  } = useMint(collectionData?.collectionAddress);
+    writeContract,
+    data: actualMintData,
+    isSuccess: mintedSuccess,
+    isError: mintedError,
+    isLoading: isSendingMintTx,
+  } = useWriteContract();
+  const { collectionData, error, isError, isLoading, refetch } =
+    useCurrentCollectionData(chain);
 
-  const shouldDisplayConnectWalletCta =
-    !collectionData || isError || chain?.unsupported;
+  const [isWaitingMint, setIsWaitingMint] = useState(false);
+
+  const handleMint = () => {
+    if (!collectionData?.collectionAddress) {
+      console.error("Collection address is not defined");
+      return;
+    }
+    if (!address) {
+      console.error("Address is not defined");
+      return;
+    }
+
+    const mestaAddress: string | undefined = MestaNetworksMap.get(
+      chain?.id ?? 11155111
+    );
+
+    writeContract({
+      address: mestaAddress! as `0x${string}`,
+      abi: mestaAbi,
+      functionName: "mintToken",
+      args: [collectionData.collectionAddress, address],
+    });
+  };
+
+  const shouldDisplayConnectWalletCta = !collectionData || isError;
   const shouldDisplayCurrentCollection =
-    collectionData && !error && !isLoading && !chain?.unsupported;
+    collectionData && !isError && !isLoading;
 
   useEffect(() => {
     if (mintedSuccess) {
-      void refetch();
+      // void refetch();
+      console.log("refetch");
     }
-  }, [mintedSuccess, refetch]);
+  }, [mintedSuccess]);
 
   return (
     <Box className={styles.mintPage}>
@@ -42,7 +66,7 @@ export function MintPage() {
         <>
           <CurrentCollection
             collectionData={collectionData}
-            mint={writeMint}
+            mint={handleMint}
             isSendingMintTx={isSendingMintTx}
             isWaitingMint={isWaitingMint}
           />

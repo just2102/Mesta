@@ -2,8 +2,7 @@
 
 import { Button } from "@mui/material";
 import styles from "./MintButton.module.scss";
-import { useMint } from "~/app/api/web3/hooks/write/useMint";
-import { useEffect } from "react";
+import { useAccount } from "wagmi";
 
 interface Props {
   mint: () => void;
@@ -16,15 +15,17 @@ export default function MintButton({
   isSendingMintTx,
   isWaitingMint,
 }: Props) {
+  const { isConnected } = useAccount();
+
   return (
     <>
       <Button
-        disabled={isSendingMintTx || isWaitingMint}
+        disabled={isSendingMintTx || isWaitingMint || !isConnected}
         onClick={mint}
         className={styles.mintButton}
         variant="outlined"
       >
-        Mint (Free)
+        {isConnected ? "Mint (Free)" : "Connect Wallet"}
       </Button>
     </>
   );

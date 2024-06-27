@@ -1,11 +1,9 @@
 import "~/styles/globals.scss";
 
 import { Inter } from "next/font/google";
-import { headers } from "next/headers";
 
-import { TRPCReactProvider } from "~/trpc/react";
 import { Header } from "./_components/Header/Header";
-import Providers from "./_providers/Providers";
+import Web3ModalProvider from "~/context";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,7 +11,7 @@ const inter = Inter({
 
 export const metadata = {
   title: "Mesta",
-  description: "Mesta Website",
+  description: "Mesta — The Place For Your Memories",
 };
 
 export default function RootLayout({
@@ -24,10 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>
+        <Web3ModalProvider>
           <Header />
-          <TRPCReactProvider headers={headers()}>{children}</TRPCReactProvider>
-        </Providers>
+          {children}
+        </Web3ModalProvider>
       </body>
     </html>
   );

@@ -2,32 +2,33 @@
 
 import { mestaAbi } from "../../abi/Mesta";
 import { mestaCollectionAbi } from "../../abi/MestaCollection";
-import { useContractRead, useContractReads } from "wagmi";
-import { useNetwork } from "wagmi";
+import { useReadContract, useReadContracts } from "wagmi";
 import { MestaNetworksMap } from "../../const/Addresses";
 import { type CollectionData } from "../../types/Collection";
 import { fetchIpfsImage } from "../../../ipfs/fetchIpfsImage";
 import { useEffect, useState } from "react";
+import { type Chain } from "wagmi/chains";
 
-export const useCurrentCollectionData = () => {
-  const { chain } = useNetwork();
+export const useCurrentCollectionData = (chain: Chain | undefined) => {
   const [collectionData, setCollectionData] = useState<CollectionData | null>(
     null
   );
   const mestaAddress: string | undefined = MestaNetworksMap.get(
     chain?.id ?? 11155111
   );
+
   const {
     data: currentCollectionAddress,
     isError: currentCollectionIsError,
     isLoading: currentCollectionLoading,
     error: currentCollectionError,
-  } = useContractRead({
+  } = useReadContract({
     address: mestaAddress as `0x${string}`,
     abi: mestaAbi,
     functionName: "currentCollection",
     chainId: chain?.id,
   });
+
   const contracts = [
     {
       address: currentCollectionAddress!,
@@ -72,15 +73,16 @@ export const useCurrentCollectionData = () => {
     isLoading: collectionDataLoading,
     error: collectionDataError,
     refetch,
-  } = useContractReads({
+  } = useReadContracts({
     contracts,
-    enabled: contracts.length > 0,
   });
+
   useEffect(() => {
     const updateCollectionData = async () => {
       if (data) {
         try {
           const coverAsImageUri = data[0]?.result as string;
+
           const coverAsImage = coverAsImageUri
             ? await fetchIpfsImage(coverAsImageUri)
             : null;
@@ -94,18 +96,22 @@ export const useCurrentCollectionData = () => {
             collectionAddress: currentCollectionAddress,
           };
 
+          console.log("newCollectionData", newCollectionData);
+
           setCollectionData(newCollectionData);
         } catch (fetchError) {
-          console.error("Error fetching IPFS image:", fetchError);
+          console.error("Error fetching collection data:", fetchError);
         }
       }
     };
 
     void updateCollectionData();
-  }, [data, refetch]);
+  }, [data, currentCollectionAddress]);
 
   const isLoading = currentCollectionLoading || collectionDataLoading;
   const isError = currentCollectionIsError || collectionDataIsError;
   const error = currentCollectionError ?? collectionDataError;
+
+  console.log("collection data", collectionData);
   return { collectionData, error, isError, isLoading, refetch };
 };

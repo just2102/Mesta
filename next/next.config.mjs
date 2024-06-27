@@ -1,10 +1,16 @@
-/**
- * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
- * for Docker builds.
- */
-await import("./src/env.mjs");
-
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  webpack: (config) => {
+    config.externals.push("pino-pretty", "lokijs", "encoding");
+    return config;
+  },
+  images: {
+    remotePatterns: [
+      {
+        hostname: `${process.env.THIRDWEB_CLIENT_ID}.ipfscdn.io`,
+      },
+    ],
+  },
+};
 
 export default config;

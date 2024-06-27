@@ -25,7 +25,6 @@ export function NftBox({
     isMinted
   );
   const shouldDisplayMintedNft = isMinted && !isWaitingMint && nftImage;
-  console.log(`is waiting mint for nft id: ${nftId}: ${isWaitingMint}`);
 
   return (
     <div className={styles.nftBoxContainer}>
