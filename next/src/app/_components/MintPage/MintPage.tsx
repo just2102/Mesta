@@ -76,12 +76,12 @@ export function MintPage() {
       });
 
       if (receipt.status === "success") {
-        void router.refresh();
+        void fetchCollectionData();
       }
     };
 
     void waitForReceipt();
-  }, [mintTx, router]);
+  }, [fetchCollectionData, mintTx, router]);
 
   return (
     <Box className={styles.mintPage}>
