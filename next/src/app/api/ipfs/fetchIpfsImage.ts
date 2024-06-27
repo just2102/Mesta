@@ -10,7 +10,6 @@ export const fetchIpfsImage = async (ipfsUri: string): Promise<string> => {
   const url = `${ipfsGateway}${ipfsHash}`;
 
   try {
-    console.log("trying to fetch: ", url);
     const response = await fetch(url, {
       mode: "cors",
       cache: "no-cache",

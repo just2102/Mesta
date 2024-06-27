@@ -1,4 +1,5 @@
 import { defaultWagmiConfig } from "@web3modal/wagmi";
+import { type Chain, createPublicClient, http } from "viem";
 import { mainnet, sepolia } from "wagmi/chains";
 import { walletConnect } from "wagmi/connectors";
 
@@ -23,5 +24,12 @@ export const config = defaultWagmiConfig({
   projectId: getProjectId(),
   metadata,
   connectors: [walletConnect({ projectId: getProjectId() })],
-  ssr: true,
+  ssr: false,
 });
+
+export function getClient(chain: Chain) {
+  return createPublicClient({
+    chain,
+    transport: http(),
+  });
+}

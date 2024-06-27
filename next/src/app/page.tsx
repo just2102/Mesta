@@ -5,6 +5,8 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <main className={styles.main}>

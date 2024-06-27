@@ -1,14 +1,16 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { Box } from "@mui/material";
 import { CurrentCollection } from "./CurrentCollection/CurrentCollection";
 import styles from "./MintPage.module.scss";
-import Loading from "~/app/loading";
-import { useCurrentCollectionData } from "~/app/api/web3/hooks/read/useCurrentCollectionData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAccount, useWriteContract } from "wagmi";
 import { MestaNetworksMap } from "~/app/api/web3/const/Addresses";
 import { mestaAbi } from "~/app/api/web3/abi/Mesta";
+import { readCurrentCollectionData } from "~/app/api/web3/actions/readCurrentCollectionData";
+import { type CollectionData } from "~/app/api/web3/types/Collection";
 
 export function MintPage() {
   const { chain, address } = useAccount();
@@ -19,8 +21,10 @@ export function MintPage() {
     isError: mintedError,
     isLoading: isSendingMintTx,
   } = useWriteContract();
-  const { collectionData, error, isError, isLoading, refetch } =
-    useCurrentCollectionData(chain);
+
+  const [collectionData, setCollectionData] = useState<CollectionData | null>(
+    null
+  );
 
   const [isWaitingMint, setIsWaitingMint] = useState(false);
 
@@ -44,12 +48,21 @@ export function MintPage() {
     });
   };
 
-  const shouldDisplayCurrentCollection =
-    collectionData && !isError && !isLoading;
+  const shouldDisplayCurrentCollection = collectionData !== null;
+
+  useEffect(() => {
+    const fetchasd = async () => {
+      if (!chain) return;
+
+      const _collectionData = await readCurrentCollectionData(chain);
+      setCollectionData(_collectionData);
+    };
+
+    void fetchasd();
+  }, [chain]);
 
   return (
     <Box className={styles.mintPage}>
-      {isLoading && <Loading />}
       {shouldDisplayCurrentCollection && (
         <>
           <CurrentCollection
