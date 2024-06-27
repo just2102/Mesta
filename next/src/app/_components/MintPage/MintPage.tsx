@@ -5,7 +5,7 @@ import { CurrentCollection } from "./CurrentCollection/CurrentCollection";
 import styles from "./MintPage.module.scss";
 import Loading from "~/app/loading";
 import { useCurrentCollectionData } from "~/app/api/web3/hooks/read/useCurrentCollectionData";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAccount, useWriteContract } from "wagmi";
 import { MestaNetworksMap } from "~/app/api/web3/const/Addresses";
 import { mestaAbi } from "~/app/api/web3/abi/Mesta";
@@ -48,13 +48,6 @@ export function MintPage() {
 
   const shouldDisplayCurrentCollection =
     collectionData && !isError && !isLoading;
-
-  useEffect(() => {
-    if (mintedSuccess) {
-      // void refetch();
-      console.log("refetch");
-    }
-  }, [mintedSuccess]);
 
   return (
     <Box className={styles.mintPage}>

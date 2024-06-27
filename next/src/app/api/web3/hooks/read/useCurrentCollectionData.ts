@@ -112,6 +112,5 @@ export const useCurrentCollectionData = (chain: Chain | undefined) => {
   const isError = currentCollectionIsError || collectionDataIsError;
   const error = currentCollectionError ?? collectionDataError;
 
-  console.log("collection data", collectionData);
   return { collectionData, error, isError, isLoading, refetch };
 };
